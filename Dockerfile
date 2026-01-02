@@ -40,7 +40,8 @@ RUN apk add --no-cache \
 # Copy the compiled binary and necessary files from builder
 COPY --from=builder /install/usr/sbin/radsecproxy /usr/sbin/radsecproxy
 COPY --from=builder /install/usr/bin/radsecproxy-* /usr/bin/
-COPY --from=builder /install/etc /etc
+COPY --from=builder /install/usr/share/man/man5/radsecproxy.conf.5 /usr/share/man/man5/
+COPY --from=builder /install/usr/share/man/man8/radsecproxy* /usr/share/man/man8/
 
 # Create necessary directories
 RUN mkdir -p /var/log/radsecproxy
