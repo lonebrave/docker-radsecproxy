@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  radsecproxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        RADSECPROXY_VERSION: 1.10.1
+    image: radsecproxy:latest
+    container_name: radsecproxy
+    restart: unless-stopped
+    
+    # Mount configuration and certificates
+    volumes:
+      - ./config/radsecproxy.conf:/etc/radsecproxy.conf:ro
+      - ./config/certs:/etc/radsecproxy/certs:ro
+      - radsecproxy-logs:/var/log/radsecproxy
+    
+    # Expose RADIUS and RadSec ports
+    ports:
+      - "1812:1812/udp"  # RADIUS authentication
+      - "1813:1813/udp"  # RADIUS accounting
+      - "2083:2083/tcp"  # RadSec (RADIUS over TLS)
+    
+    # Network configuration
+    networks:
+      - radsecproxy-net
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "pgrep", "-x", "radsecproxy"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  radsecproxy-net:
+    driver: bridge
+
+volumes:
+  radsecproxy-logs:
