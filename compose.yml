@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        RADSECPROXY_VERSION: 1.10.1
+        RADSECPROXY_VERSION: 1.11.2
     image: radsecproxy:latest
     container_name: radsecproxy
     restart: unless-stopped

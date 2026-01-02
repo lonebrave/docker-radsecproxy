@@ -3,7 +3,7 @@
 FROM alpine:3.23.2 AS builder
 
 # Define radsecproxy version as a build argument
-ARG RADSECPROXY_VERSION=1.10.1
+ARG RADSECPROXY_VERSION=1.11.2
 
 # Install build dependencies
 RUN apk add --no-cache \

@@ -94,7 +94,7 @@ docker compose logs -f radsecproxy
 1. **Build the image:**
 
 ```bash
-# Build with default version (1.10.1)
+# Build with default version (1.11.2)
 docker build -t radsecproxy:latest .
 
 # Build with specific version
@@ -120,7 +120,7 @@ docker run -d \
 
 | Argument | Default | Description |
 |----------|---------|-------------|
-| `RADSECPROXY_VERSION` | `1.10.1` | Git tag, branch, or commit to build |
+| `RADSECPROXY_VERSION` | `1.11.2` | Git tag, branch, or commit to build |
 
 ### Exposed Ports
 
